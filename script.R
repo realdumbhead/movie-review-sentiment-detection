@@ -53,7 +53,8 @@ to_binary <- function(y){
 
 ### Training ####
 rfc <- randomForest(x = train_x, 
-                    y = train_y %>% to_binary() %>% unlist() %>% as.factor())
+                    y = train_y %>% to_binary() %>% unlist() %>% as.factor(),
+                    ntree = 50)
 
 cv_pred_y <- rfc %>% predict(cv_x)
 rfc_acc <- sum(as.numeric(as.character(cv_pred_y)) == unlist(to_binary(cv_y))) / nrow(cv_y)
